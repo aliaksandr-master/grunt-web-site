@@ -1,0 +1,82 @@
+mixin panel(name, text, type)
+	.panel(id='api-tester-' + name, class='panel-' + (type ? type : 'default'))
+		.panel-heading!= text
+		.panel-body
+			block
+
+mixin pre-panel(name, text)
+	.panel.panel-default(id='api-tester-' + name)
+		.panel-heading!= text
+		pre.panel-body
+			block
+
+mixin collapsed-panel(name, text, collapsed)
+	.panel.panel-default(id=name + '-wr')
+		.panel-heading
+			span.pull-right
+				= ' '
+				span.caret
+			a.panel-title(data-toggle="collapse", href='#api-tester-' + name, style='display: block')!= text
+		.panel-collapse.collapse(id='api-tester-' + name, class=collapsed ? 'in' : '')
+			.panel-body
+				block
+
+mixin pre-collapsed-panel(name, text, collapsed)
+	.panel.panel-default(id=name + '-wr')
+		.panel-heading
+			span.pull-right
+				= ' '
+				span.caret
+			a.panel-title(data-toggle="collapse", href='#api-tester-' + name, style='display: block')!= text
+		.panel-collapse.collapse(id='api-tester-' + name, class=collapsed ? 'in' : '')
+			pre.panel-body
+				block
+
+mixin run-panel(name, text)
+	.panel.panel-default.panel-run(id='api-tester-' + name)
+		.panel-heading.clearfix
+			span.pull-left!= text
+		.panel-body
+			.panel-body-content
+
+mixin raw-mlt-panel(name, text, value)
+	.panel.panel-default.panel-raw-mlt(id='api-tester-' + name)
+		- var viewTypes = ['json', 'table', 'html', 'raw'];
+		.panel-heading.clearfix
+			span.pull-left!= text
+			span.panel-raw-select: +select('_' + name, (value ? value : 0), viewTypes)
+		each item, index in viewTypes
+			pre.panel-body(class='-raw-mlt-' + index + ' -raw-mlt-n-' + item, style=value == index ? '' : 'display: none;')
+
+mixin raw-mlt-collapsed-panel(name, text, collapsed, value)
+	.panel.panel-default.panel-raw-mlt(id='api-tester-' + name)
+		- var viewTypes = ['json', 'table', 'html', 'raw'];
+		.panel-heading.clearfix
+			span.pull-right
+				= ' '
+				span.caret
+			span.panel-raw-select: +select('_' + name, (value ? value : 0), viewTypes)
+			a.panel-title(data-toggle="collapse", href='#api-tester-' + name + '--clps', style='display: block')!= text
+		.panel-collapse.collapse(id='api-tester-' + name+ '--clps', class=collapsed ? 'in' : '')
+			each item, index in viewTypes
+				pre.panel-body(class='-raw-mlt-' + index + ' -raw-mlt-n-' + item, style=value == index ? '' : 'display: none;')
+
+mixin raw-panel(name, text)
+	.panel.panel-default.panel-raw(id='api-tester-' + name)
+		.panel-heading.clearfix
+			span.pull-left!= text
+			span.panel-raw-toggle: +checkbox('_' + name, 1, 'Pretty', true)
+		pre.panel-body.-transformed
+		pre.panel-body.-raw(style='display:none;')
+
+mixin raw-collapsed-panel(name, text, collapsed)
+	.panel.panel-default.panel-raw(id='api-tester-' + name)
+		.panel-heading.clearfix
+			span.pull-right
+				= ' '
+				span.caret
+			span.panel-raw-toggle: +checkbox('_' + name, 1, 'Pretty', true)
+			a.panel-title(data-toggle="collapse", href='#api-tester-' + name + '--clps', style='display: block')!= text
+		.panel-collapse.collapse(id='api-tester-' + name+ '--clps', class=collapsed ? 'in' : '')
+			pre.panel-body.-transformed
+			pre.panel-body.-raw(style='display:none;')

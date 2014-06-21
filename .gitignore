@@ -1,0 +1,25 @@
+# ide and os files
+/.idea/
+*.idea/
+/npm-debug.log
+*.DS_Store
+*.desktop
+*.thumb
+*/.~*
+*/~*
+*/*~
+*.sublime*
+
+# package managers
+/composer.lock
+/opt/frontend/bower/
+/node_modules/
+/opt/backend/composer/
+
+
+# compile files
+/.developer/
+/var/
+/tmp/
+/deploy/
+/build/

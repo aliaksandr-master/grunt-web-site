@@ -1,0 +1,35 @@
+{
+	"name": "grunt-jade-static-site",
+	"version": "0.0.1",
+	"dependencies": {
+		"grunt": "~0.4.0",
+
+		"jade": "latest",
+
+		"node-xlsx": "latest",
+
+		"lodash": "latest",
+
+		"grunto": "latest",
+
+		"grunt-contrib-jade": "latest",
+
+		"grunt-contrib-less": "latest",
+		"grunt-autoprefixer": "latest",
+
+		"grunt-contrib-clean": "latest",
+		"grunt-contrib-concat": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-text-replace": "latest",
+
+		"grunt-contrib-watch": "latest",
+
+		"grunt-contrib-jshint": "latest",
+
+		"grunt-bower-task": "latest",
+
+		"grunt-template": "latest"
+    },
+	"scripts": {
+	}
+}
