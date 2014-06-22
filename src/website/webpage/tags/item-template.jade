@@ -1,0 +1,16 @@
+extends ../index-ext
+
+block scripts
+	script require(['modules/videos']);
+
+block body
+
+	h1= data.item.name
+
+	ul
+		each video in data.videos
+			if (data._.contains(video.tags, data.item.name))
+				li
+					a(href='/' + data.LOCALE + '/videos/' + video.id)
+						h2= video.title || video.vimeo.title
+						img(src=video.vimeo.thumbnail_large)

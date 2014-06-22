@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 
 					_.each(result, function (cells, index) {
 						var values = _.map(cells, function (cell) {
-							return cell == null || _.isNaN(cell) || _.isNaN(cell.value) ? null : cell.value;
+							return cell == null || _.isNaN(cell) || _.isNaN(cell.value) ? null : String(cell.value);
 						});
 
 						if (index === 0) {
@@ -50,7 +50,7 @@ module.exports = function (grunt) {
 
 							_.each(titles, function (title, index) {
 								var obj = objData,
-									segments = title.split('/'),
+									segments = String(title).split('/'),
 									i = 0;
 
 								for (; i < (segments.length - 1); i++) {
@@ -110,7 +110,7 @@ module.exports = function (grunt) {
 								data[lang] = {};
 							}
 							var obj = data[lang];
-							var segments = translate.key.split('/');
+							var segments = String(translate.key).split('/');
 							var i = 0;
 							for (; i < (segments.length - 1); i++) {
 								if (obj[segments[i]] == null) {
@@ -145,11 +145,40 @@ module.exports = function (grunt) {
 			]
 		})
 
+		.vimeoVideoInfo({
+			options: {
+				getIds: function (fpath, videos) {
+					var ids = [];
+
+					_.each(videos, function (video) {
+						video.video_id = Number((video.href || '').replace(/http:\/\/vimeo.com\/(\d+)/, '$1'));
+						ids.push(video.video_id);
+					});
+
+					return ids;
+				},
+
+				processInfo: function (videos, id, data) {
+					_.each(videos, function (video) {
+						if (video.video_id === Number(id)) {
+							video.vimeo = data[0];
+						}
+					});
+				}
+			},
+			files: [
+				{
+					src: VAR + '/data/xlsx/ro/videos.json',
+					overwrite: true
+				}
+			]
+		})
+
 		.processFile({
 			options: {
 				process: function (fpath, videos) {
 					_.each(videos, function (video) {
-						video.tags = _.filter(video.tags ? video.tags.split(/(?:\s*,\s*)+/) : [], function (tag) {
+						video.tags = _.filter(video.tags ? String(video.tags).split(/(?:\s*,\s*)+/) : [], function (tag) {
 							return !_.isEmpty(tag);
 						});
 						video.lang = _.isEmpty(video.lang) ? opt.DEFAULT_LANG : video.lang;
@@ -188,7 +217,17 @@ module.exports = function (grunt) {
 							data[tag]++;
 						});
 					});
-					return data;
+
+					var tags = [];
+					_.each(data, function (v, k) {
+						tags.push({
+							id: k,
+							name: k,
+							count: v
+						});
+					});
+
+					return tags;
 				}
 			},
 			files: [

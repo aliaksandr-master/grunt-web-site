@@ -5,11 +5,8 @@
 		"h_less": "https://github.com/aliaksandr-pasynkau/H_Less.git",
 		"jquery": "~1.10.0",
 		"URIjs": "~1.13.1",
+		"video.js": "~4.6.1",
 		"bootstrap-less": "~3.1.0",
-		"modernizr": "latest",
-		"backbone": "latest",
-		"backbone.dualstorage": "~1.1.0",
-		"backbone.stickit": "~0.7.0",
 		"lodash": "~2.0.0",
 		"requirejs": "~2.1.9",
 		"require-css": "latest"
@@ -24,43 +21,5 @@
 		"examples",
 		"test",
 		"tests"
-	],
-	"exportsOverride": {
-		"devicejs": {
-			".": "lib/device.js"
-		},
-		"lodash": {
-			".": "dist/lodash.js"
-		},
-		"detectizr": {
-			".": "detectizr.js"
-		},
-		"h_less": {
-			"h_less/less": "less"
-		},
-		"jquery": {
-			".": "jquery.js"
-		},
-		"modernizr": {
-			".": "modernizr.js"
-		},
-		"almond": {
-			".": "almond.js"
-		},
-		"requirejs": {
-			".": "require.js"
-		},
-		"require-css": {
-			".": ["css.js", "normalize.js", "css-builder.js"]
-		},
-		"chaplin": {
-			".": "chaplin.js"
-		},
-		"handlebars": {
-			".": "handlebars.runtime.js"
-		},
-		"moment": {
-			".": "moment.js"
-		}
-	}
+	]
 }

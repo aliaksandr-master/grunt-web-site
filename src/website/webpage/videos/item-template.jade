@@ -1,1 +1,27 @@
 extends ../index-ext
+
+block scripts
+	script require(['modules/videos']);
+
+block body
+
+	h1= data.item.title || data.item.vimeo.title || 'Video'
+
+	video.video-js(src=data.item.href, type='mpeg/mp4', width='100%')
+
+	- var _related = [];
+	- var _counter = 0;
+	each video in data.videos
+		if (data.item.tags && video.tags)
+			- counter++;
+			if (counte < 5)
+				_related.push(video)
+
+	if (_related.length)
+		h2  Related Videos
+		ul
+			each video in _related
+				li
+					a(href='/' + data.LOCALE + '/videos/' + video.id)
+						h3= video.title || video.vimeo.title
+						img(src=video.vimeo.thumbnail_large)

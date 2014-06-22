@@ -6,11 +6,12 @@ module.exports = function (grunt) {
 		NAME = this.LNK(),
 		SRC = this.LNK(opt.SRC),
 		OPT = opt.CWD + '/opt/frontend/bower',
-		BUILD = this.LNK(opt.BUILD);
+		BUILD = this.LNK(opt.BUILD),
+		VENDOR = BUILD + '/static/vendor';
 
 	this
 		.clean([
-			BUILD + '/static/vendor'
+			VENDOR
 		])
 
 		.bower({
@@ -38,7 +39,7 @@ module.exports = function (grunt) {
 						var segm = path.split(/[\\\/]+/);
 						return cwd.replace(/\/$/, '') + '/' + segm.shift() + '/' + segm.pop()
 					},
-					dest: BUILD + '/static/vendor'
+					dest: VENDOR
 				},
 				{
 					expand: true,
@@ -46,9 +47,47 @@ module.exports = function (grunt) {
 					src: [
 						'**/*.{svg,eot,ttf,woff}'
 					],
-					dest: BUILD + '/static/vendor/bootstrap/fonts'
+					dest: VENDOR + '/bootstrap/fonts'
+				},
+				{
+					expand: true,
+					cwd: OPT + '/video.js/dist/video-js',
+					src: '**/*{js,eot,svg,ttf,woff,swf}',
+					dest: VENDOR + '/videojs'
+				},
+				{
+					src: opt.CWD + '/opt/frontend/vendor/videojs-vimeo/videojs-vimeo.js',
+					dest: VENDOR + '/videojs-vimeo/videojs-vimeo.js'
 				}
 			]
+		})
+
+		.less({
+			options: {
+				strictUnits: true,
+				cleancss: true,
+				sourceMap: false,
+				relativeUrls: true,
+				report: false,
+				modifyVars: {
+					'ie8screen': 'screen'
+				}
+			},
+			files: [
+				{
+					src: OPT + '/video.js/src/css/video-js.less',
+					dest: VENDOR + '/videojs/video-js.css'
+				}
+			]
+		})
+
+		.replace({
+			src: VENDOR + '/videojs/video-js.css',
+			overwrite: true,
+			replacements: [{
+				from: '\\0', // remove ie8 hack form videojs styles. because it fail css parsing
+				to: ''
+			}]
 		})
 
 		.concat({
@@ -66,7 +105,7 @@ module.exports = function (grunt) {
 				OPT + '/bootstrap-less/js/tab.js',
 				OPT + '/bootstrap-less/js/affix.js'
 			],
-			dest: BUILD + '/static/vendor/bootstrap/bootstrap.js'
+			dest: VENDOR + '/bootstrap/bootstrap.js'
 		})
 	;
 };

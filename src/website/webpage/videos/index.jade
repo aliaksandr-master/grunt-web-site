@@ -1,1 +1,25 @@
 extends ../index-ext
+
+block scripts
+	script require(['modules/videos']);
+
+block body
+	h1 Videos
+	//- console.log(data.videos);
+	ul
+		each video in data.videos
+			li
+				a(href='/' + data.LOCALE + '/videos/' + video.id)
+					h2= video.title || video.vimeo.title
+					img(src=video.vimeo.thumbnail_large)
+
+	h3 Tags
+	ul
+		- var counter = 0;
+		each tag in data.tags
+			if (++counter < 5)
+				li
+					a(href='/' + data.LOCALE + '/tags/' + tag.id + '/')= tag.name + ' (' + tag.count + ')'
+		if (counter > 5)
+			li
+				a(href='/' + data.LOCALE + '/tags/') More Tags

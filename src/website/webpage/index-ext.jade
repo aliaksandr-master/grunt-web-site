@@ -1,7 +1,31 @@
-extends ../inc/jade/html
-
-block meta
+//include ../inc/jade/mixins/mixins
+doctype html
+html(lang=data.LOCALE)
+head
+	meta(charset='utf-8')
+	meta(name='viewport', content='width=device-width, initial-scale=1.0')
 	title= seo ? seo.title : ''
+	block meta
+	link(href='/static/styles/index.css', rel='stylesheet')
+	block styles
+body
+	.content-bg
+		img.content-bg-img.-active.-img-0(src="/static/images/bg/default.jpg")
+	a(href='/' + data.LOCALE + '/videos') RelaxOnly
+	ul
+		each locale in data.locales
+			li
+				a(href='/' + locale + '/', class=data.LOCALE == locale ? '-active' : '')= locale
+	ul
+		li
+			a(href='/' + data.LOCALE + '/tags/') Tags
+		li
+			a(href='/' + data.LOCALE + '/videos/') all videos
 
-block body
-	| hello world !!!
+
+	block body
+
+	script(src='/static/vendor/requirejs/require.js')
+	script(src='/static/js/require.js')
+	script require(['main', 'bg']);
+	block scripts

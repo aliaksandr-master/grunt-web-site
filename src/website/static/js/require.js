@@ -10,26 +10,25 @@ require.config({
 		modules: 'modules',
 		templates: '../templates',
 
-		vendor:   '../../../opt/frontend/vendor',
 		packages: '../vendor',
-		opt:   '../../../opt/frontend/custom',
 
-		URIjs: '../../../opt/frontend/bower/URIjs/src'
+		URIjs: '../vendor/URIjs'
 
 	},
 
 	map: {
 		'*':{
-
 			jquery: 'packages/jquery/jquery',
 			backbone: 'packages/backbone/backbone',
 			handlebars: 'packages/handlebars/handlebars',
 			lodash: 'packages/lodash/dist/lodash',
 			underscore: 'packages/lodash/dist/lodash',
 			bootstrap: 'packages/bootstrap/bootstrap',
+			videojs: 'packages/videojs/video',
+			videojsVimeo: 'packages/videojs-vimeo/videojs-vimeo',
 
-			'text': 'packages/requirejs-text/text',
-			'css': 'packages/require-css/css'
+			text: 'packages/requirejs-text/text',
+			css: 'packages/require-css/css'
 		}
 	},
 

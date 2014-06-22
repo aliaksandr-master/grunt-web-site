@@ -5,3 +5,7 @@ RewriteBase /
 
 RewriteCond %{REQUEST_URI} !^/(ru|en|static)(.*)$
 RewriteRule ^(.*)$ en/$1 [R,L]
+
+
+RewriteRule ^(en)/$ $1/videos/ [R,L]
+RewriteRule ^(ru)/$ $1/videos/ [R,L]
