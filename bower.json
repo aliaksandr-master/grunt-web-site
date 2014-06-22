@@ -29,6 +29,9 @@
 		"devicejs": {
 			".": "lib/device.js"
 		},
+		"lodash": {
+			".": "dist/lodash.js"
+		},
 		"detectizr": {
 			".": "detectizr.js"
 		},

@@ -7,16 +7,16 @@ module.exports = function (grunt) {
 		BUILD = this.LNK(opt.BUILD);
 
 	this
-		.watch('jade', {
+		.watch({
 			files: [
 				SRC + '/**/*.jade'
 			],
 			tasks: [
-				NAME + '/compile/page'
+				NAME + '/compile/webpage'
 			]
 		})
 
-		.watch('less', {
+		.watch({
 			files: [
 				SRC + '/**/*.{less,css}'
 			],
@@ -25,7 +25,7 @@ module.exports = function (grunt) {
 			]
 		})
 
-		.watch('js', {
+		.watch({
 			files: [
 				SRC + '/**/*.js'
 			],
@@ -34,18 +34,17 @@ module.exports = function (grunt) {
 			]
 		})
 
-		.watch('templates', {
+		.watch({
 			files: [
-				SRC + '/**/*.hbs'
+				SRC + '/static/images/**/*'
 			],
 			tasks: [
-				NAME + '/compile/templates'
+				NAME + '/compile/images'
 			]
 		})
 
-		.watch('other', {
+		.watch({
 			files: [
-				SRC + '/**/*.php',
 				SRC + '/.htaccess'
 			],
 			tasks: [

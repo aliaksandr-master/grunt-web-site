@@ -27,10 +27,14 @@ module.exports = function (grunt) {
 
 					var sourceTemplates = grunt.file.expand({cwd: TPL_CWD}, [
 						'**/*.jade',
+						'!**/*-inc.jade',
+						'!**/*-ext.jade',
 						'!**/item-template.jade'
 					]);
 
 					var itemTemplates = grunt.file.expand({cwd: TPL_CWD}, [
+						'!**/*-inc.jade',
+						'!**/*-ext.jade',
 						'**/item-template.jade'
 					]);
 

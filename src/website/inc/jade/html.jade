@@ -1,0 +1,16 @@
+include mixins/mixins
+doctype html
+html(lang=LOCALE)
+head
+	meta(charset='utf-8')
+	meta(name='viewport', content='width=device-width, initial-scale=1.0')
+	block meta
+	link(href='/static/styles/index.css', rel='stylesheet')
+	block styles
+body
+	block body
+	block script
+	script(src='/static/vendor/requirejs/require.js')
+	script(src='/static/js/require.js')
+	script require(['main']);
+block scripts

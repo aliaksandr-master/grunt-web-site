@@ -9,8 +9,10 @@ module.exports = function (grunt) {
 	this
 		.include([
 			NAME + '/compile/data',
+			NAME + '/compile/vendor',
 			NAME + '/compile/js',
 			NAME + '/compile/styles',
+			NAME + '/compile/images',
 			NAME + '/compile/webpage',
 			NAME + '/compile/env'
 		])
