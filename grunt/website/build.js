@@ -11,7 +11,7 @@ module.exports = function (grunt) {
 			NAME + '/compile/data',
 			NAME + '/compile/js',
 			NAME + '/compile/styles',
-			NAME + '/compile/pages'
+			NAME + '/compile/webpage'
 		])
 	;
 };

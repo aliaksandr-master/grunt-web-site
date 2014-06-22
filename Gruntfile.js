@@ -32,6 +32,19 @@ module.exports = require('grunto')(function (grunt) {
 			return link;
 		},
 
+		DEFAULT_LANG: 'en',
+
+		GET_TEMPLATE_DATA: function () {
+			var videos = grunt.file.readJSON(CWD + '/var/website/data/videos.json');
+			var tags   = grunt.file.readJSON(CWD + '/var/website/data/tags.json');
+
+			return {
+				locale: {},
+				videos: videos,
+				tags: tags
+			};
+		},
+
 		BUILD_TIMESTAMP: time,
 
 		PACKAGE: pkg

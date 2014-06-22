@@ -13,6 +13,7 @@
 		"grunto": "latest",
 
 		"grunt-contrib-jade": "latest",
+		"grunt-rename": "latest",
 
 		"grunt-contrib-less": "latest",
 		"grunt-autoprefixer": "latest",

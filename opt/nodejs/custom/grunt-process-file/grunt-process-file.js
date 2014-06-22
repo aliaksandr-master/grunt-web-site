@@ -19,7 +19,7 @@ module.exports = function (grunt) {
 			},
 
 			process: function (fpath, content) {
-				return grunt.fail.fatal('process function is undefined');
+				return content;
 			},
 
 			beautifyJSON: true
