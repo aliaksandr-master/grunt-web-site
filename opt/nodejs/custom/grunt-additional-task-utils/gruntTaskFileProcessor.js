@@ -126,6 +126,9 @@ module.exports = function (thisTaskObj) {
 			var defaultKey = '-';
 			var sortedFiles = {};
 			thisTaskObj.files.forEach(function(file) {
+				if (file.src == null) {
+					grunt.fail.fatal('incorrect files format, must be [{src: "some/1/file", dest: "some/2/file"}]')
+				}
 				var files = file.src.filter(function(filepath) {
 					if (!grunt.file.exists(filepath)) {
 						grunt.log.warn('Source file "' + filepath + '" not found.');

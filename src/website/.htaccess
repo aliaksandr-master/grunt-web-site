@@ -1,0 +1,7 @@
+RewriteEngine On
+Options +FollowSymlinks
+
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !^/(ru|en|static)(.*)$
+RewriteRule ^(.*)$ en/$1 [R,L]

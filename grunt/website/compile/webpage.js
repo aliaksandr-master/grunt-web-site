@@ -10,6 +10,7 @@ module.exports = function (grunt) {
 
 	var _ = require('lodash');
 	var jade = require('jade');
+	var path = require('path');
 
 	var tempData = null;
 
@@ -21,44 +22,60 @@ module.exports = function (grunt) {
 
 		.processFile({
 			options: {
-				splittingToFiles: function (locales, dest) {
+				splittingIntoFiles: function (locales, dest) {
 					var TPL_CWD = SRC + '/webpage';
+
 					var sourceTemplates = grunt.file.expand({cwd: TPL_CWD}, [
 						'**/*.jade',
-						'!**/*-template.jade'
+						'!**/item-template.jade'
 					]);
 
 					var itemTemplates = grunt.file.expand({cwd: TPL_CWD}, [
-						'**/*-list-template.jade'
+						'**/item-template.jade'
 					]);
 
 					var files = {};
 
 					_.each(locales, function (locale) {
 						var DEST_DIR = dest + '/' + locale;
-
-						var videos = grunt.file.readJSON(VAR + '/localized/' + locale + '/videos.json');
-						var tags = grunt.file.readJSON(VAR + '/localized/' + locale + '/tags.json');
-						var translation = grunt.file.readJSON(VAR + '/localized/' + locale + '/translation.json');
+						var LOCALE_CWD = VAR + '/localized/' + locale;
 
 						var data = {
-							locale: locales,
-							currentLocale: locale,
-							video: videos,
-							tag: tags,
-							key: translation
+							LOCALE: locale
 						};
 
-						_.each(sourceTemplates, function (template) {
-							var _data = _.extend({
+						var dataFiles = grunt.file.expand({cwd: LOCALE_CWD}, [
+							'**/*.json'
+						]);
 
-							}, data);
-							files[DEST_DIR + '/' + path.dirname(template) + '/' + path.basename(template, path.extname(template)) + '.html' ] = jade.renderFile(TPL_CWD + '/' + template, _data);
+						_.each(dataFiles, function (dataFile) {
+							var obj = data;
+							var segments = dataFile.replace(/\.json$/, '').split('/');
+							var i = 0;
+							for (; i < (segments.length - 1); i++) {
+								if (obj[segments[i]] == null) {
+									obj[segments[i]] = {};
+								}
+								obj = obj[segments[i]];
+							}
+							obj[segments[i]] = grunt.file.readJSON(LOCALE_CWD + '/' + dataFile);
+						});
+
+						_.each(sourceTemplates, function (template) {
+							var _data = _.extend({}, data);
+							var dir = path.dirname(template);
+							dir = dir && dir !== '.' ? dir + '/' : '';
+							files[DEST_DIR + '/' + dir + path.basename(template, path.extname(template)) + '.html' ] = jade.renderFile(TPL_CWD + '/' + template, _data);
 						});
 
 						_.each(itemTemplates, function (template) {
-							var baseName = path.basename(template, path.extname(template));
-							var listData = data[baseName.replace('-item-template', '')];
+							var dir = path.dirname(template);
+							var listData = data;
+							var segments = dir.split('/');
+							for (var i = 0; i < segments.length; i++) {
+								listData = listData[segments[i]];
+							}
+
 							_.each(listData, function (item) {
 								var _data = _.extend({
 									item: item
@@ -73,7 +90,7 @@ module.exports = function (grunt) {
 			},
 			files: [
 				{
-					scr: VAR + '/localized/locales.json',
+					src: VAR + '/localized/locales.json',
 					dest: BUILD
 				}
 			]
