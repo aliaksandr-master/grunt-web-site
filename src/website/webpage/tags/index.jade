@@ -2,8 +2,10 @@ extends ../index-ext
 
 block body
 
-	.clearfix
-		span.pull-left
-			span.glyphicon.glyphicon-tags
+	.tag-l
+		span.tag-l-h
+			span.glyphicon.glyphicon-tags &nbsp;
 		each tag in data.tags
-				a(href='/' + data.LOCALE + '/tags/' + tag.id + '/')= tag.name + ' (' + tag.count + ')'
+			a.tag-li(href='/' + data.LOCALE + '/tags/' + tag.id + '/')
+				= tag.name
+				sup= tag.count

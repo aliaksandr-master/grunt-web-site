@@ -1,5 +1,33 @@
 @import "../../../inc/styles/mixins";
 
+body {
+	color: #666;
+}
+
+.container {
+	padding: @pad * 2;
+}
+
+.tag-l {
+	font-size: 30px;
+	line-height: 1.2;
+}
+
+.tag-l-h {
+	display: inline-block;
+	margin-right: @pad * 4;
+	width: 30px;
+}
+
+.tag-li {
+	color: #666;
+	display: inline-block;
+	margin-right: @pad * 4;
+}
+.tag-li.-active {
+	color: red;
+}
+
 .navbar-brand {
 	background: #eee;
 	padding: @pad * 4;

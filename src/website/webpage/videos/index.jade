@@ -4,9 +4,9 @@ block scripts
 	script require(['modules/videos']);
 
 block body
-	h1 Videos
+	h1= data.translation.all_videos
 	//- console.log(data.videos);
-	ul.row.video-l
+	ul.row.video-l.text-left
 		each video in data.videos
 			li.col-md-6.col-md-10.col-xs-15.video-li
 				a.thumbnail(href='/' + data.LOCALE + '/videos/' + video.id)
@@ -14,13 +14,16 @@ block body
 						img.video-li-img(src=video.vimeo.thumbnail_large)
 						div.caption
 							h2.video-li-h= video.title || video.vimeo.title
-	h3 Tags
-	ul
-		- var counter = 0;
+
+	.tag-l
+		span.tag-l-h
+			span.glyphicon.glyphicon-tags &nbsp;
+		- var _counter = 0;
 		each tag in data.tags
-			if (++counter < 5)
-				li
-					a(href='/' + data.LOCALE + '/tags/' + tag.id + '/')= tag.name + ' (' + tag.count + ')'
-		if (counter > 5)
-			li
-				a(href='/' + data.LOCALE + '/tags/') More Tags
+			if (++_counter < 5)
+				a.tag-li(href='/' + data.LOCALE + '/tags/' + tag.id + '/')
+					= tag.name
+					sup= tag.count
+		if (_counter > 5)
+			a.tag-li(href='/' + data.LOCALE + '/tags/')= data.translation.more
+

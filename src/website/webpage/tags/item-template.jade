@@ -5,8 +5,15 @@ block scripts
 
 block body
 
-	h1= data.item.name
-
+	.tag-l
+		span.tag-l-h
+			span.glyphicon.glyphicon-tags &nbsp;
+		each tag in data.tags
+			a.tag-li(href='/' + data.LOCALE + '/tags/' + tag.id + '/', class=(data.item.id === tag.id ? '-active' : ''))
+				= tag.name
+				sup= tag.count
+	br
+	br
 	ul.row.video-l
 		each video in data.videos
 			if (data._.contains(video.tags, data.item.name))

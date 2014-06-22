@@ -10,6 +10,16 @@ block body
 	div.video-item-wr(style='padding-bottom: ' + ((data.item.vimeo.height / data.item.vimeo.width) * 100) + '%;')
 		video.video-item.video-js(src=data.item.href, type='mpeg/mp4')
 
+	if data.item.tags.length
+		br
+		br
+		.tag-l
+			span.tag-l-h
+				span.glyphicon.glyphicon-tags &nbsp;
+			- var _counter = 0;
+			each tag in data.item.tags
+				a.tag-li(href='/' + data.LOCALE + '/tags/' + tag + '/')= tag
+
 	- var _related = [];
 	- var _counter = 0;
 	each video in data.videos
@@ -17,7 +27,7 @@ block body
 			- _related.push(video);
 
 	if (_related.length)
-		h2  Related Videos
+		h2= data.translation.related_videos
 		ul.row.video-l.text-left
 			each video in _related
 				li.col-md-6.col-md-10.col-xs-15.video-li
