@@ -1,8 +1,9 @@
 extends ../index-ext
 
 block body
-	h3 Tags
-	ul
+
+	.clearfix
+		span.pull-left
+			span.glyphicon.glyphicon-tags
 		each tag in data.tags
-			li
 				a(href='/' + data.LOCALE + '/tags/' + tag.id + '/')= tag.name + ' (' + tag.count + ')'

@@ -7,21 +7,22 @@ block body
 
 	h1= data.item.title || data.item.vimeo.title || 'Video'
 
-	video.video-js(src=data.item.href, type='mpeg/mp4', width='100%')
+	div.video-item-wr(style='padding-bottom: ' + ((data.item.vimeo.height / data.item.vimeo.width) * 100) + '%;')
+		video.video-item.video-js(src=data.item.href, type='mpeg/mp4')
 
 	- var _related = [];
 	- var _counter = 0;
 	each video in data.videos
-		if (data.item.tags && video.tags)
-			- counter++;
-			if (counte < 5)
-				_related.push(video)
+		if (video.id != data.item.id && data._.intersection(data.item.tags, video.tags).length && ++_counter < 5)
+			- _related.push(video);
 
 	if (_related.length)
 		h2  Related Videos
-		ul
+		ul.row.video-l.text-left
 			each video in _related
-				li
-					a(href='/' + data.LOCALE + '/videos/' + video.id)
-						h3= video.title || video.vimeo.title
-						img(src=video.vimeo.thumbnail_large)
+				li.col-md-6.col-md-10.col-xs-15.video-li
+					a.thumbnail(href='/' + data.LOCALE + '/videos/' + video.id)
+						div.video-li-img-wr(style='padding-bottom: ' + ((video.vimeo.height / video.vimeo.width) * 100) + '%;')
+							img.video-li-img(src=video.vimeo.thumbnail_large)
+							div.caption
+								h2.video-li-h= video.title || video.vimeo.title

@@ -11,19 +11,20 @@ head
 body
 	.content-bg
 		img.content-bg-img.-active.-img-0(src="/static/images/bg/default.jpg")
-	a(href='/' + data.LOCALE + '/videos') RelaxOnly
-	ul
-		each locale in data.locales
-			li
-				a(href='/' + locale + '/', class=data.LOCALE == locale ? '-active' : '')= locale
-	ul
-		li
-			a(href='/' + data.LOCALE + '/tags/') Tags
-		li
-			a(href='/' + data.LOCALE + '/videos/') all videos
 
+	header.clearfix
+		a.navbar-brand(href='/' + data.LOCALE + '/videos/')
+			b Relax
+				em Only
 
-	block body
+		ul.locale-l
+			each locale in data.locales
+				li.locale-li
+					a.locale-li-link(href='/' + locale + '/', class=data.LOCALE == locale ? '-active' : '')= locale
+
+	.container
+
+		block body
 
 	script(src='/static/vendor/requirejs/require.js')
 	script(src='/static/js/require.js')

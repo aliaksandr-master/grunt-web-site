@@ -73,10 +73,13 @@ module.exports = function (grunt) {
 						});
 
 						_.each(sourceTemplates, function (template) {
-							var _data = _.extend({}, data);
 							var dir = path.dirname(template);
 							dir = dir && dir !== '.' ? dir + '/' : '';
-							files[DEST_DIR + '/' + dir + path.basename(template, path.extname(template)) + '.html' ] =
+							var webpage = dir + path.basename(template, path.extname(template));
+							var _data = _.extend({
+								webpage: webpage
+							}, data);
+							files[DEST_DIR + '/' + webpage + '.html' ] =
 								jade.renderFile(TPL_CWD + '/' + template, _.extend({
 									data: _data
 								}, options));
@@ -91,10 +94,12 @@ module.exports = function (grunt) {
 							}
 
 							_.each(listData, function (item) {
+								var webpage = dir + '/' + item.id;
 								var _data = _.extend({
+									webpage: webpage,
 									item: item
 								}, data);
-								files[DEST_DIR + '/' + path.dirname(template) + '/' + item.id + '/index.html' ] =
+								files[DEST_DIR + '/' + webpage + '/index.html' ] =
 									jade.renderFile(TPL_CWD + '/' + template, _.extend({
 										data: _data
 									}, options));

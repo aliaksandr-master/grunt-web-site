@@ -6,13 +6,14 @@ block scripts
 block body
 	h1 Videos
 	//- console.log(data.videos);
-	ul
+	ul.row.video-l
 		each video in data.videos
-			li
-				a(href='/' + data.LOCALE + '/videos/' + video.id)
-					h2= video.title || video.vimeo.title
-					img(src=video.vimeo.thumbnail_large)
-
+			li.col-md-6.col-md-10.col-xs-15.video-li
+				a.thumbnail(href='/' + data.LOCALE + '/videos/' + video.id)
+					div.video-li-img-wr(style='padding-bottom: ' + ((video.vimeo.height / video.vimeo.width) * 100) + '%;')
+						img.video-li-img(src=video.vimeo.thumbnail_large)
+						div.caption
+							h2.video-li-h= video.title || video.vimeo.title
 	h3 Tags
 	ul
 		- var counter = 0;
