@@ -14,8 +14,11 @@
 
 		"grunt-contrib-jade": "latest",
 		"grunt-rename": "latest",
+		"grunt-contrib-requirejs": "latest",
 
 		"grunt-contrib-less": "latest",
+		"grunt-contrib-cssmin": "latest",
+		"grunt-contrib-uglify": "latest",
 		"grunt-autoprefixer": "latest",
 
 		"grunt-contrib-clean": "latest",

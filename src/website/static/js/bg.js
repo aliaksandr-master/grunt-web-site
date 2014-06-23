@@ -2,6 +2,7 @@ define(function(require, exports, module){
 	"use strict";
 
 	var $ = require('jquery');
+
 	var TIMEOUT = 30000;
 	var images = ['default.jpg', 'bg-1.jpg', 'bg-2.jpg', 'bg-3.jpg', 'bg-4.jpg', 'bg-5.jpg'];
 	var current = 0;

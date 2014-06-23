@@ -3,7 +3,6 @@ define(function(require, exports, module){
 
 	var $ = require('jquery');
 	var videoJs = require('videojs');
-	require('css!packages/videojs/video-js');
 	require('videojsVimeo');
 
 	$('video').each(function () {

@@ -2,10 +2,10 @@
 
 module.exports = function (grunt) {
 	var opt = this,
-		NAME = this.lnk(),
-		SRC = this.lnk(opt.SRC),
-		DEPLOY = this.lnk(opt.DEPLOY),
-		BUILD = this.lnk(opt.BUILD);
+		NAME = this.LNK(),
+		SRC = this.LNK(opt.SRC),
+		DEPLOY = this.LNK(opt.DEPLOY),
+		BUILD = this.LNK(opt.BUILD);
 
 	this
 		.less({
@@ -24,6 +24,19 @@ module.exports = function (grunt) {
 			]
 		})
 
+		.uglify({
+			files: [
+				{
+					expand: true,
+					src: [
+						'vendor/js/**/*.js'
+					],
+					cwd: BUILD,
+					dest: BUILD
+				}
+			]
+		})
+
 		.clean('deploy', [
 			DEPLOY
 		])
@@ -33,37 +46,23 @@ module.exports = function (grunt) {
 				expand: true,
 				cwd: BUILD,
 				src: [ '**/*' ],
-				dest: opt.DEPLOY + '/' + NAME
+				dest: DEPLOY
 			}]
 		})
-	;
 
-
-	var _ = require('lodash');
-
-	var incOptions = {
-		cwd: BUILD + '/static/js',
-		rename: function(base, opt) {
-			return opt.replace(/\.js$/, '');
-		}
-	};
-
-	var include = _(grunt.file.expandMapping(['controllers/**/*.js'], '', incOptions)).pluck('dest');
-
-	this
 		.requirejs({
 			options: {
-				appDir: BUILD + '/static',
-				baseUrl: 'js',
-				dir: opt.DEPLOY + '/' + NAME + '/static',
+				appDir: BUILD,
+				baseUrl: 'static/js/',
+				dir: DEPLOY,
 				modules: [{
 					name: 'main',
-					include: include,
+					include: ['bg', 'modules/videos'],
 					insertRequire: ['main']
 				}],
-				mainConfigFile: opt.DEPLOY + '/' + NAME + '/static/js/config.js',
+				mainConfigFile: DEPLOY + '/static/js/main.js',
 				almond: true,
-				optimize: 'uglify2',
+				optimize: 'none',
 				useStrict: true,
 				normalizeDirDefines: 'skip',
 				keepBuildDir: false,
@@ -79,7 +78,7 @@ module.exports = function (grunt) {
 		.copy('2build', {
 			files: [{
 				expand: true,
-				cwd: opt.DEPLOY + '/' + NAME,
+				cwd: DEPLOY,
 				src: [ '**/*' ],
 				dest: BUILD
 			}]

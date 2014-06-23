@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 				cwd: SRC,
 				src: [
 					'**/*.{less,css}',
-					'!inc/**/*.{less,css}',
+					'!**/inc/**/*.{less,css}',
 					'!webpage/**/*.{less,css}'
 				],
 				dest: BUILD,
