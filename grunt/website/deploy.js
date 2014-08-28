@@ -24,19 +24,6 @@ module.exports = function (grunt) {
 			]
 		})
 
-		.uglify({
-			files: [
-				{
-					expand: true,
-					src: [
-						'vendor/js/**/*.js'
-					],
-					cwd: BUILD,
-					dest: BUILD
-				}
-			]
-		})
-
 		.clean('deploy', [
 			DEPLOY
 		])
@@ -69,6 +56,19 @@ module.exports = function (grunt) {
 				preserveLicenseComments: false,
 				inlineText: false
 			}
+		})
+
+		.uglify({
+			files: [
+				{
+					expand: true,
+					src: [
+						'**/*.js'
+					],
+					cwd: DEPLOY,
+					dest: DEPLOY
+				}
+			]
 		})
 
 		.clean('build', [
