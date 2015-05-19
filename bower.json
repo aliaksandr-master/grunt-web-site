@@ -1,15 +1,15 @@
 {
-	"name": "listslider",
+	"name": "grunt-web-site",
 	"version": "0.2.1",
 	"dependencies": {
-		"h_less": "https://github.com/aliaksandr-pasynkau/H_Less.git",
+		"hless": "*",
 		"jquery": "~1.10.0",
 		"URIjs": "~1.13.1",
 		"video.js": "~4.6.1",
 		"bootstrap-less": "~3.1.0",
 		"lodash": "~2.0.0",
 		"requirejs": "~2.1.9",
-		"require-css": "latest"
+		"require-css": "*"
 	},
 	"private": true,
 	"ignore": [
